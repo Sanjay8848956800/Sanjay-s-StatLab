@@ -1,0 +1,598 @@
+---
+title: 20INMCAL204-Assignment
+author:
+  - name: Sanjay Krishnan J
+    email: sanjay.inmca2025@saintgits.org
+    affiliation: Student, INMCA 20-25
+    correspondingauthor: true
+    footnote: 1
+  - name: Siju K.S
+    email: siju.swamy@saintgits.org
+    affiliation: Saintgits College of Engineering (Autonomous)
+    footnote: 2
+  - name: Jobin Jose
+    email: jobin.jose@saintgits.org
+    affiliation: Saintgits College of Engineering (Autonomous)
+    footnote: 2
+address:
+  - code: Student, INMCA 20-25
+    address: Department of Computer Applications, RB402
+  - code: Saintgits College of Engineering (Autonomous)
+    address: Department of Mathematics, AB304
+footnote:
+  - code: 1
+    text: "Student, 20INMCAL204."
+  - code: 2
+    text: "Course Faculty, 20INMCAL204."
+journal: "Mathematics Department for Evaluation"
+date: "`r Sys.Date()`"
+classoption: preprint, 3p, authoryear
+linenumbers: true
+numbersections: true
+# Use a CSL with `citation_package = "default"`
+# csl: https://www.zotero.org/styles/elsevier-harvard
+output:
+  rticles::elsevier_article:
+    keep_tex: true
+    citation_package: natbib
+---
+\tableofcontents
+\newpage
+---
+
+# Question-1
+
+>**Case** Calculate the coefficient of correlation for the ages of husbands and wives:
+
+$\begin{array}{|l|l|l|l|l|l|l|l|l|l|l|}
+\hline
+Age of Husband(Years) & 23 & 27 & 28 & 29 & 30 & 31 & 33 & 35 & 36 & 39 \\ \hline
+Age of Wife (Years)  & 18 & 22 & 23 & 24 & 25 & 26 & 28 & 29 & 30 & 32 \\ \hline
+\end{array}$ 
+
+## R-code
+```{r}
+# loading data
+age_husband=c(23,27,28,29,30,31,33,35,36,39)
+age_wife=c(18,22,23,24,25,26,28,29,30,32)
+```
+
+## Calculating correlation coefficient
+```{r}
+resp2=cor.test(age_husband,age_wife,method='pearson')
+resp2
+```
+## Result
+
+The coefficient of correlation for the ages of husbands and wives is `0.9955072`. Since it's greater than 0.7 ,then ages are highly positively correlated. 
+
+# Question-2
+
+>**Case** The rank of the same 15 students in two subjects Statistics and Accountancy are given below, the two numbers within the brackets denoting the ranks of the same students in Statistics and Accountancy respectively. (0,10),(2,7),(3,2),(4,6),(5,4),(6,8),(7,3),(8,1),(9,11),(10,15),(11,9),(12,5),(13,14),(14,12),(15,13). Use Spearman's formula to find the rank correlation coefficient 
+
+## R-code
+```{r}
+# loading data
+statistics=c(0,2,3,4,5,6,7,8,9,10,11,12,13,14,15)
+accountancy=c(10,7,2,6,4,8,3,1,11,15,9,5,14,12,13)
+```
+
+## Calculating correlation coefficient
+
+```{r}
+res3=cor.test(statistics,accountancy,method='spearman')
+res3
+```
+## Result
+
+The rank correlation coefficient between the two subjects Statistics and Accountancy is `0.5142857 `.Since it's less than 0.7 ,then ages are less positively correlated.
+
+
+# Question-3
+
+>**Case** From the following data, obtain the two regression equations
+
+$\begin{array}{|l|l|l|l|l|l|l|l|l|l|l|}
+\hline
+Sales:     & 91 & 97 & 108 & 121 & 67 & 124 & 51 & 73 & 111 & 57 \\ \hline
+Purchases: & 71 & 75 & 69  & 97  & 70 & 91  & 39 & 61 & 80  & 47 \\ \hline
+\end{array}$
+
+## R-code
+
+```{r}
+#loading data
+Sales=c(91,97,108,121,67,124,51,73,111,57)
+Purchases=c(71,75,69,97,70,91,39,61,80,47)
+```
+
+```{r}
+marketing=data.frame(sales=c(91,97,108,121,67,124,51,73,111,57),purchases=c(71,75,69,97,70,91,39,61,80,47))
+```
+
+```{r}
+model=lm(marketing$sales~marketing$purchases )
+model
+```
+
+```{r}
+model=lm(marketing$purchases~marketing$sales )
+model
+```
+## Results
+
+purchases=14.8113 + 0.6132(sales)
+
+Sales=-5.188+-5.188(purchases)
+
+# Question-4
+
+>**Case**The production manager of a company maintains that the flow time in days (y), depends on the number of operations (x) to be performed. The following data give the necessary information:
+
+$\begin{array}{|l|l|l|l|l|l|l|l|l|l|l|}
+\hline
+x & 2 & 2  & 3  & 4  & 4  & 5  & 6  & 6  & 7  & 7  \\ \hline
+y & 8 & 13 & 14 & 11 & 20 & 10 & 22 & 26 & 22 & 25 \\ \hline
+\end{array}$
+
+Calculate the value of the Karl Pearson’s Correlation Coefficient.
+
+## R-code
+```{r}
+# loading data
+x=c(2,2,3,4,4,5,6,6,7,7)
+y=c(8,13,14,11,20,10,22,26,22,25)
+```
+## Calculating correlation coefficient
+```{r}
+res=cor.test(x,y,method="pearson")
+res
+```
+
+## Result 
+The value of the Karl Pearson’s correlation coefficient is `0.781513`.Since it's greater than 0.7 ,than ages are highly positively correlated.
+
+
+# Question-5
+
+>**Case**Calculate Spearman’s rank correlation coefficient between advertisement cost and sales from the following data
+
+$\begin{array}{|l|l|l|l|l|l|l|l|l|l|l|}
+\hline
+\begin{tabular}[c]{@{}l@{}}Advertisement\\ Cost (‘000 Rs)\end{tabular} & 39 & 65 & 62 & 90 & 82 & 75 & 25 & 98 & 36 & 78 \\ \hline
+\begin{tabular}[c]{@{}l@{}}Sales (Lakhs\\ Rs.)\end{tabular}            & 47 & 53 & 58 & 86 & 62 & 68 & 60 & 91 & 51 & 84 \\ \hline
+\end{array}$
+
+## R-code
+```{r}
+# loading data
+Advertisement=c(9,65,62,90,82,75,25,98,36,78)
+Sales=c(47,53,58,86,62,68,60,91,51,84)
+```
+## Calculating correlation coefficient
+```{r}
+ress3=cor.test(Advertisement,Sales,method='spearman')
+ress3
+
+```
+## Result
+
+The Spearman’s rank correlation coefficient between advertisement cost and sales is `0.8787879`.
+
+
+# Question-6
+
+>**Case** From the data given below, find the two regression equations
+
+$\begin{array}{|l|l|l|l|l|l|l|l|l|l|l|}
+\hline
+\begin{tabular}[c]{@{}l@{}}Marks in\\ Economics\end{tabular}  & 25 & 28 & 35 & 32 & 31 & 36 & 29 & 38 & 34 & 32 \\ \hline
+\begin{tabular}[c]{@{}l@{}}Marks in\\ Statistics\end{tabular} & 43 & 46 & 49 & 41 & 36 & 32 & 31 & 30 & 33 & 39 \\ \hline
+\end{array}$
+
+## R-code
+```{r}
+#loading data
+Economics=c(25,28,35,32,31,36,29,38,34,32)
+Statistics=c(43,46,49,41,36,32,31,30,33,39)
+```
+
+```{r}
+marks=data.frame(Economics=c(25,28,35,32,31,36,29,38,34,32),Statistics=c(43,46,49,41,36,32,31,30,33,39))
+```
+
+```{r}
+model=lm(marks$Economics~marks$Statistics)
+model
+```
+
+```{r}
+model=lm(marks$Statistics~marks$Economics)
+model
+```
+## Result and Discussion
+
+the two regression equations are 
+$Economics = 40.8794 - 0.2337\times statistics$
+
+
+$statistics = 59.2571 - 0.6643\times Economics$
+
+
+# Question-7
+
+>**Case** A die was thrown 9000 times and of these 3220 yielded a 3 or 4.Can the die be regarded as unbiased?
+
+## R-code
+```{r}
+prop.test(x=3220,n=9000,p=1/3,alternative = 'two.sided')
+```
+## Result and discussion
+
+Since the p-value is less than 0.05, the null hypothesis is rejected at 5 percent significance level. So it is reasonable to conclude that the coin is biased.
+
+# Question-8
+
+>**Case** In a random sample of 400 persons from a large population, 120 are females. Can it be said that males and females are in the ratio 5:3 in the population? Use 1% significance?
+
+## R-code
+
+```{r}
+prop.test(x=120,n=420,p=3/8,alternative = 'two.sided')
+```
+
+## Result 
+
+Since the p-value is less than 0.05, the null hypothesis is rejected at 5 percent significance level. So it is reasonable to conclude that the ratio of male to female is 5:3.
+
+
+# Question-9
+
+>**Case** The adjoining table shows the number of motor registrations in a certain territory for a term of 5 years and the sale of motor tyres by a firm in that territory for the same period.
+
+\begin{tabular}{lll}
+\hline
+\multicolumn{1}{|l|}{Years} & \multicolumn{1}{l|}{Motor registration} & \multicolumn{1}{l|}{No.of tyres sold} \\ \hline
+\multicolumn{1}{|l|}{1}     & \multicolumn{1}{l|}{600}                & \multicolumn{1}{l|}{1250}             \\ \hline
+\multicolumn{1}{|l|}{2}     & \multicolumn{1}{l|}{630}                & \multicolumn{1}{l|}{1100}             \\ \hline
+\multicolumn{1}{|l|}{3}     & \multicolumn{1}{l|}{720}                & \multicolumn{1}{l|}{1300}             \\ \hline
+\multicolumn{1}{|l|}{4}     & \multicolumn{1}{l|}{750}                & \multicolumn{1}{l|}{1350}             \\ \hline
+\multicolumn{1}{|l|}{5}     & \multicolumn{1}{l|}{800}                & \multicolumn{1}{l|}{1500}             \\ \hline                    
+\end{tabular}
+
+Find the regression equation to estimate the sale of Tyres when motor registration is known. Estimate sale of Tyres when registration is 850.
+
+## R-code
+```{r}
+marketing=data.frame(X=c(600,630,720,750,800),Y=c(1250,1100,1300,1350,1500))
+```
+
+```{r}
+cor.test(marketing$X,marketing$Y)
+```
+
+```{r}
+model <- lm(Y ~ X , data = marketing)
+summary(model)$coef
+```
+## Result 
+
+The p-value of the F-statistic is 0.06567.
+
+
+# Question-10
+
+>**Case** In a big city 325 men out of 600 men were found to be smokers. Does this information support the conclusion that the majority of men in this city are smokers? Justify your answer statistically.
+
+## R-code
+```{r}
+prop.test(x=325,n=600,p=1/2,alternative = 'greater')
+```
+
+## Result
+
+Since the p-value is less than 0.05, the null hypothesis is rejected at 5 percent significance level. So it is reasonable to conclude that the ratio of smokers to non smokers is greater than 50%.
+
+# Question-11
+
+>**Case** The mean height of 500 male students who showed above average participation in college athletics was 75.2 inches with a standard deviation of 2.3 inches; while 500 male students who showed no interest in such participation had mean height of 68.5 inches with a standard deviation 2.9 inches. Test the hypothesis that male students who participate in college athletics are taller than other male students.
+
+## R-code
+
+```{r}
+library(BSDA)
+```
+
+```{r}
+zsum.test(mean.x = 75.2,n.x = 500,sigma.x = 75.2,
+mean.y = 68.5,n.y = 500,sigma.y = 2.9,alternative = 'greater')
+```
+## Result
+
+Since the p-value is less than 0.05, the null hypothesis is rejected at 5 percent significance level. So it is reasonable to conclude that the mean height of male students shows above average participation are significantly taller.
+
+
+# Question-12
+
+>**Case** Certain pesticide is packed into bags by a machine. A random sample of 10 bags drawn and their contents are found to weigh (in kg.) as follows:
+
+50, 49, 52, 44, 45, 48, 46, 45, 49, 45. 
+
+Test if the average packing can be taken to be 50 kg.
+
+
+## R-code
+
+```{r}
+weight=c(50,49,52,44,45,48,46,45,49,45)
+```
+
+```{r}
+data=t.test(weight,mu=50)
+data
+```
+## Results
+
+The p-value of the test is `0.01084`
+
+
+
+# Question-13
+
+>**Case**In two large populations there are 30% and 25% respectively of fair haired people. Is this difference likely be hidden in samples of 1200 and 900 respectively from the two populations.
+ 
+## R-code
+
+```{r}
+prop.test(x=c(360,225),n=c(1200,900),alternative = 'two.sided')
+```
+
+## Result 
+
+Since the p-value is less than 0.05, the null hypothesis is rejected at 5 percent significance level. So it is reasonable to conclude that difference in proportion is significant.
+
+
+
+# Question-14
+
+>**Case** It is claimed that a random sample of 100 tyres with a mean life of 15269 kms is drawn from a population of tyres which has a mean life of 15200 kms and a standard deviation of 1248 kms. Test the validity of the claim at (i). 5% and (ii) 1% level of significance.
+
+## R-code
+
+```{r}
+zsum.test(mean.x = 15200,n.x = 100,sigma.x = 1248,mu=15269,alternative = 'less',conf.level = 0.95)
+```
+
+```{r}
+zsum.test(mean.x = 15200,n.x = 100,sigma.x = 1248,mu=15269,alternative = 'less',conf.level = 0.99)
+```
+
+## Result 
+
+Since the p-value is greater than 0.05, the null hypothesis is not rejected at 5 percent and 1 percent significance level. So it is reasonable to conclude that the company’s claim is not valid.
+
+
+# Question-15
+
+>**Case** Certain pesticide is packed into bags by a machine. A random sample of 10 bags drawn and their contents are found to weigh (in kg.) as follows:
+
+50, 49, 52, 44, 45, 48, 46, 45, 49, 45. 
+
+Test if the average packing can be taken to be 50 kg.
+
+## R-code
+
+```{r}
+weight=c(50,49,52,44,45,48,46,45,49,45)
+```
+
+```{r}
+data=t.test(weight,mu=50)
+data
+```
+
+## Results
+
+The p-value of the test is `0.01084`.
+
+
+# Question-16
+
+>**Case** A sample of 400 students of MCA and 400 students of M.Tech classes was taken to know their opinion about autonomous colleges. 290 of the MCA and 310 of the M.Tech students favored the autonomous status. Present these facts in the form of a table and test at 5% level, that the opinion regarding autonomous status of colleges is independent of the level of classes of students.
+
+## R-code
+```{r}
+Fav=c(290,310)
+Agnst=c(110,90)
+tab1=data.frame(Fav,Agnst)
+```
+
+```{r}
+chisq.test(tab1)
+```
+
+## Result 
+
+Since the p-value is greater than 0.05, the null hypothesis is not rejected at 5 percent significance level. So it is reasonable to conclude that the opinion is not independent of the class of students.
+
+
+# Question-17
+
+>**Case** An IQ test was administered to 5 persons before and after they were trained. The results are given below:
+
+$\begin{array}{l|l|l|l|l|l}
+\hline
+\multicolumn{1}{|l|}{Candidates}  & \multicolumn{1}{l|}{1}   & \multicolumn{1}{l|}{2}   & \multicolumn{1}{l|}{3}   & \multicolumn{1}{l|}{4}   & \multicolumn{1}{l|}{5}   \\ \hline
+\multicolumn{1}{|l|}{IQ  before  training} & \multicolumn{1}{l|}{110} & \multicolumn{1}{l|}{120} & \multicolumn{1}{l|}{123} & \multicolumn{1}{l|}{132} & \multicolumn{1}{l|}{125} \\ \hline
+\multicolumn{1}{|l|}{IQ  after  training}  & \multicolumn{1}{l|}{120} & \multicolumn{1}{l|}{118} & \multicolumn{1}{l|}{125}  & \multicolumn{1}{l|}{136} & \multicolumn{1}{l|}{121} \\ \hline
+\end{array}$
+
+Test whether there is any change in IQ after the training programme.
+
+
+```{r}
+before_training=c(110,120,123,132,125)
+after_training=c(120,118,125,136,121)
+```
+
+```{r}
+data=t.test(x=before_training,y=after_training,paired=TRUE)
+data
+```
+## Results 
+
+p-value is less than the significance level 0.05 , therefore we will reject the null hypothesis.
+
+
+# Question-18
+
+>**Case** The number of scooter accidents per month in a certain town were as follows:
+
+                 12,8,20,2,14,10,15,6,9,4
+           
+  > Are these frequencies in agreement with the belief that accident conditions were the same during the ten month period?
+
+## R-code
+```{r}
+observed <- c(12,8,20,2,14,10,15,6,9,4)
+expected <- c(.1,.1,.1,.1,.1,.1,.1,.1,.1,.1)
+```
+
+```{r}
+
+#perform Chi-Square Goodness of Fit Test
+reschgf=chisq.test(x=observed, p=expected)
+reschgf
+```
+## Results & discussions
+
+Since the p-value =0.001628 is less than 0.05, we reject the null hypothesis. 
+
+
+# Question-19
+
+>**Case** In an experiment on the immunization of humans from Covid 19, the following results were obtained. Find the expected frequency from this cross table.
+
+$\begin{tabular}{lll}
+\hline
+\multicolumn{1}{|l|}{Status}     & \multicolumn{1}{l|}{Died} & \multicolumn{1}{l|}{Survived} \\ \hline
+\multicolumn{1}{|l|}{Vaccinated} & \multicolumn{1}{l|}{2}    & \multicolumn{1}{l|}{10}       \\ \hline
+\multicolumn{1}{|l|}{Not vaccinated } & \multicolumn{1}{|l|}{6} & \multicolumn{1}{|l|}{6} \\ \hline                            
+\end{tabular}$
+
+## R-code
+
+```{r}
+vaccinated=c(2,10)
+not_vaccinated=c(6,6)
+
+```
+
+```{r}
+data=t.test(x=vaccinated,y=not_vaccinated,paired = TRUE)
+data
+```
+
+## Results & discussions
+
+Since p-test is greater than significance level 0.05, we fail to reject the null hypothesis.
+
+# Question-20
+
+>**Case** Novartis Pvt.Ltd has the head office in Kolkata and a branch at Mumbai. The personal director wanted to know if the workers at the two places would like the introduction of work at home plan and a survey was conducted for this purpose. Out of a sample of 500 workers at Kolkata, 62% favours the new plan. At Mumbai, out of a sample of 400 workers, 41% were against the new plan. Is there any significant difference between the two groups in their attitude towards the new plan at 5% level?
+
+## R-code
+
+```{r}
+n1=500 
+n2=400 
+x1=310
+x2=236
+
+```
+
+```{r}
+
+Fav=c(x1,x2)
+Agnst=c(n1-x1,n2-x2)
+tab2=data.frame(Fav,Agnst)
+tab2
+```
+
+```{r}
+prop.test(x=c(x1,x2),n=c(n1,n2),p=NULL,alternative="two.sided",conf.level=0.95,correct= TRUE)
+```
+
+## Result
+
+Since the p-value(0.3971) is greater than 0.05 ,null hypothesis is not rejected at 5% level.
+
+
+
+# Question-22
+
+>**Case** The following table show the distribution of digits in number chosen at random from a telephone directory.
+
+$\begin{array}{|l|l|l|l|l|l|l|l|l|l|l|}
+\hline
+Digit     & 0    & 1    & 2   & 3   & 4    & 5   & 6    & 7   & 8   & 9   \\ \hline
+Frequency & 1026 & 1107 & 997 & 966 & 1075 & 933 & 1107 & 972 & 964 & 853 \\ \hline
+\end{array}$
+
+ >Test whether the digits may be taken to occur equally frequently in the directory at 5% significance level.
+
+## R-code
+
+```{r}
+O=c(1026,1107,997,966,1075,933,1107,972,964,853)
+E=c(0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1)
+chisq.test(O,p=E)
+```
+
+## Result 
+
+Since the p-value is less than 0.05, the null hypothesis is rejected at 5 percent significance level. So it is reasonable to conclude that the number of occurrence is independent
+
+# Question-23
+
+>**Case**An investigation of the relative merits of two kinds of flashlight batteries showed that a random sample of 100 batteries of brand A lasted on the average 36.5 hours with a standard deviation of 1.8 hours, while a random sample of 80 batteries of brand B lasted on the average 36.8 hours with a standard deviation of 1.5 hours. Use a level of 5% significance to test whether the observed difference between the average life times is significant.
+
+```{r}
+#loading library
+library(BSDA)
+```
+
+
+```{r}
+n1=100
+n2=80
+xbar=36.5
+sd1=1.8
+ybar=36.8
+sd2=1.5
+
+```
+
+
+# Question-24
+
+>**Case** The mean return of two stocks in NSE-50 and their risk (variability) are as given below.Examine whether the difference in the variability in risk is significant at 5% level of significance.
+
+$\begin{array}{lll}
+\hline
+\multicolumn{1}{|l|}{Specification} & \multicolumn{1}{l|}{Return for 40 weeks} & \multicolumn{1}{l|}{Return for 60 weeks} \\ \hline
+\multicolumn{1}{|l|}{Mean}          & \multicolumn{1}{l|}{1258}                & \multicolumn{1}{l|}{1243}                \\ \hline
+\multicolumn{1}{|l|}{Risk(SD)}      & \multicolumn{1}{|l|}{34}                 & \multicolumn{1}{|l|}{28}                 \\ \hline                 
+\end{array}$
+
+## R-code
+```{r}
+x <- rnorm(n=40,mean=1258, sd = 34)
+y <- rnorm(n=60,mean=1243, sd = 28)
+# var test in R
+var.test(x, y, alternative = "two.sided")
+```
+
+## Result 
+
+Since the p-value is greater than 0.05, the null hypothesis is not rejected at 5 percent significance level. So it is reasonable to conclude that the variability in the risk is significant.
